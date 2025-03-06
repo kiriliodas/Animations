@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10 Loading Animations</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .animation-box {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 200px;
+    }
+
+    .animation-box h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+
+    /* Animation 1: Spinning Circle */
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(0, 0, 0, 0.1);
+      border-top-color: #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Animation 2: Growing Dots */
+    .dots-container {
+      display: flex;
+      gap: 8px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      background-color: #e74c3c;
+      border-radius: 50%;
+      animation: grow 1.5s ease-in-out infinite;
+    }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes grow {
+      0%, 100% { transform: scale(0.5); opacity: 0.3; }
+      50% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Animation 3: Bouncing Bar */
+    .bar-container {
+      display: flex;
+      align-items: flex-end;
+      height: 60px;
+      gap: 5px;
+    }
+    .bar {
+      width: 8px;
+      background-color: #9b59b6;
+      animation: bounce 1.2s ease infinite;
+    }
+    .bar:nth-child(2) { animation-delay: 0.2s; }
+    .bar:nth-child(3) { animation-delay: 0.4s; }
+    .bar:nth-child(4) { animation-delay: 0.6s; }
+    .bar:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes bounce {
+      0%, 100% { height: 15px; }
+      50% { height: 60px; }
+    }
+
+    /* Animation 4: Circular Progress */
+    .circle-progress {
+      width: 80px;
+      height: 80px;
+      position: relative;
+    }
+    .circle-progress svg { transform: rotate(-90deg); }
+    .circle-bg {
+      fill: none;
+      stroke: #eee;
+      stroke-width: 8;
+    }
+    .circle-progress-value {
+      fill: none;
+      stroke: #2ecc71;
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 251.2;
+      stroke-dashoffset: 251.2;
+      animation: circle-fill 2s linear infinite;
+    }
+    @keyframes circle-fill {
+      0% { stroke-dashoffset: 251.2; }
+      100% { stroke-dashoffset: 0; }
+    }
+
+    /* Animation 5: Fading Squares */
+    .squares-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+    }
+    .square {
+      width: 15px;
+      height: 15px;
+      background-color: #f39c12;
+      animation: fade 2s ease-in-out infinite;
+    }
+    .square:nth-child(1) { animation-delay: 0s; }
+    .square:nth-child(2) { animation-delay: 0.2s; }
+    .square:nth-child(3) { animation-delay: 0.4s; }
+    .square:nth-child(4) { animation-delay: 0.1s; }
+    .square:nth-child(5) { animation-delay: 0.3s; }
+    .square:nth-child(6) { animation-delay: 0.5s; }
+    .square:nth-child(7) { animation-delay: 0.2s; }
+    .square:nth-child(8) { animation-delay: 0.4s; }
+    .square:nth-child(9) { animation-delay: 0.6s; }
+
+    @keyframes fade {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* Animation 6: Rotating Cube */
+    .cube-container {
+      width: 60px;
+      height: 60px;
+      perspective: 120px;
+    }
+    .cube {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotate 2s linear infinite;
+    }
+    .cube-face {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background-color: rgba(52, 152, 219, 0.7);
+      border: 1px solid rgba(41, 128, 185, 0.8);
+    }
+    .front { transform: translateZ(30px); }
+    .back { transform: rotateY(180deg) translateZ(30px); }
+    .right { transform: rotateY(90deg) translateZ(30px); }
+    .left { transform: rotateY(-90deg) translateZ(30px); }
+    .top { transform: rotateX(90deg) translateZ(30px); }
+    .bottom { transform: rotateX(-90deg) translateZ(30px); }
+
+    @keyframes rotate {
+      0% { transform: rotateX(0) rotateY(0); }
+      100% { transform: rotateX(360deg) rotateY(360deg); }
+    }
+
+    /* Animation 7: Typing Dots */
+    .typing-container {
+      display: flex;
+      gap: 5px;
+    }
+    .typing-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #7f8c8d;
+      animation: typing 1.2s infinite;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Animation 8: Dual Ring */
+    .dual-ring {
+      width: 50px;
+      height: 50px;
+      position: relative;
+    }
+    .dual-ring::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 5px solid #1abc9c;
+      border-color: #1abc9c transparent #1abc9c transparent;
+      animation: dual-spin 1.2s linear infinite;
+    }
+    @keyframes dual-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Animation 9: Pulse Circle */
+    .pulse-circle {
+      width: 50px;
+      height: 50px;
+      background-color: #3498db;
+      border-radius: 50%;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.8); opacity: 0.3; }
+      50% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(0.8); opacity: 0.3; }
+    }
+
+    /* Animation 10: Flip Square */
+    .flip-square {
+      width: 50px;
+      height: 50px;
+      background-color: #e74c3c;
+      animation: flip 2s infinite;
+      transform-style: preserve-3d;
+    }
+    @keyframes flip {
+      0% { transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+      50% { transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+      100% { transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>10 Loading Animations</h1>
+  <div class="container">
+    <!-- Animation 1: Spinning Circle -->
+    <section class="animation-box">
+      <h2>Spinning Circle</h2>
+      <div class="spinner"></div>
+    </section>
+
+    <!-- Animation 2: Growing Dots -->
+    <section class="animation-box">
+      <h2>Growing Dots</h2>
+      <div class="dots-container">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </section>
+
+    <!-- Animation 3: Bouncing Bars -->
+    <section class="animation-box">
+      <h2>Bouncing Bars</h2>
+      <div class="bar-container">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </section>
+
+    <!-- Animation 4: Circular Progress -->
+    <section class="animation-box">
+      <h2>Circular Progress</h2>
+      <div class="circle-progress">
+        <svg width="80" height="80">
+          <circle class="circle-bg" cx="40" cy="40" r="35"></circle>
+          <circle class="circle-progress-value" cx="40" cy="40" r="35"></circle>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Animation 5: Fading Squares -->
+    <section class="animation-box">
+      <h2>Fading Squares</h2>
+      <div class="squares-container">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+      </div>
+    </section>
+
+    <!-- Animation 6: Rotating Cube -->
+    <section class="animation-box">
+      <h2>Rotating Cube</h2>
+      <div class="cube-container">
+        <div class="cube">
+          <div class="cube-face front"></div>
+          <div class="cube-face back"></div>
+          <div class="cube-face right"></div>
+          <div class="cube-face left"></div>
+          <div class="cube-face top"></div>
+          <div class="cube-face bottom"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Animation 7: Typing Dots -->
+    <section class="animation-box">
+      <h2>Typing Dots</h2>
+      <div class="typing-container">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      </div>
+    </section>
+
+    <!-- Animation 8: Dual Ring -->
+    <section class="animation-box">
+      <h2>Dual Ring</h2>
+      <div class="dual-ring"></div>
+    </section>
+
+    <!-- Animation 9: Pulse Circle -->
+    <section class="animation-box">
+      <h2>Pulse Circle</h2>
+      <div class="pulse-circle"></div>
+    </section>
+
+    <!-- Animation 10: Flip Square -->
+    <section class="animation-box">
+      <h2>Flip Square</h2>
+      <div class="flip-square"></div>
+    </section>
+  </div>
+</body>
+</html>
